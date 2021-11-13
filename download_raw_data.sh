@@ -1,21 +1,30 @@
 # download ConceptNet
-mkdir -p data/
-mkdir -p data/cpnet/
-wget -nc -P data/cpnet/ https://s3.amazonaws.com/conceptnet/downloads/2018/edges/conceptnet-assertions-5.6.0.csv.gz
-cd data/cpnet/
-yes n | gzip -d conceptnet-assertions-5.6.0.csv.gz
-# download ConceptNet entity embedding
-wget https://csr.s3-us-west-1.amazonaws.com/tzw.ent.npy
-cd ../../
+#mkdir -p data/
+#mkdir -p data/cpnet/
+#wget -nc -P data/cpnet/ https://s3.amazonaws.com/conceptnet/downloads/2018/edges/conceptnet-assertions-5.6.0.csv.gz
+#cd data/cpnet/
+#yes n | gzip -d conceptnet-assertions-5.6.0.csv.gz
+## download ConceptNet entity embedding
+#wget https://csr.s3-us-west-1.amazonaws.com/tzw.ent.npy
+#cd ../../
 
 
 
 
 # download CommensenseQA dataset
 mkdir -p data/csqa/
+
 wget -nc -P data/csqa/ https://s3.amazonaws.com/commensenseqa/train_rand_split.jsonl
+mv data/csqa/train_rand_split.jsonl data/csqa/train_rand_split_full.jsonl
+cat data/csqa/train_rand_split_full.jsonl | head -n 50 > data/csqa/train_rand_split.jsonl
+
 wget -nc -P data/csqa/ https://s3.amazonaws.com/commensenseqa/dev_rand_split.jsonl
+mv data/csqa/dev_rand_split.jsonl data/csqa/dev_rand_split_full.jsonl
+cat data/csqa/dev_rand_split_full.jsonl | head -n 50 > data/csqa/dev_rand_split.jsonl
+
 wget -nc -P data/csqa/ https://s3.amazonaws.com/commensenseqa/test_rand_split_no_answers.jsonl
+mv data/csqa/test_rand_split_no_answers.jsonl data/csqa/test_rand_split_no_answers_full.jsonl
+cat data/csqa/test_rand_split_no_answers_full.jsonl | head -n 50 > data/csqa/test_rand_split_no_answers.jsonl
 
 # create output folders
 mkdir -p data/csqa/grounded/
