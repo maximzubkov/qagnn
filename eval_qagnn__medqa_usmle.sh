@@ -16,7 +16,7 @@ echo "******************************"
 echo "dataset: $dataset"
 echo "******************************"
 
-save_dir_pref='saved_models'
+save_dir_pref='data/saved_models'
 mkdir -p $save_dir_pref
 
 ###### Eval ######
@@ -29,7 +29,7 @@ python3 -u qagnn.py --dataset $dataset \
       --test_statements  data/${dataset}/statement/test.statement.jsonl \
       --ent_emb ${ent_emb} \
       --save_model \
-      --save_dir saved_models \
+      --save_dir ${save_dir_pref} \
       --mode eval_detail \
-      --load_model_path saved_models/medqa_usmle_model_hf3.4.0.pt \
+      --load_model_path ${save_dir_pref}/medqa_usmle_model_hf3.4.0.pt \
       $args

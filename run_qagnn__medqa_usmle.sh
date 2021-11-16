@@ -34,7 +34,7 @@ echo "learning_rate: elr $elr dlr $dlr"
 echo "gnn: dim $gnndim layer $k"
 echo "******************************"
 
-save_dir_pref='saved_models'
+save_dir_pref='data/saved_models'
 mkdir -p $save_dir_pref
 mkdir -p logs
 
