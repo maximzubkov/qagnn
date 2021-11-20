@@ -22,7 +22,6 @@ import numpy as np
 import socket, os, subprocess, datetime
 print(socket.gethostname())
 print ("pid:", os.getpid())
-print ("conda env:", os.environ['CONDA_DEFAULT_ENV'])
 print ("screen: %s" % subprocess.check_output('echo $STY', shell=True).decode('utf'))
 print ("gpu: %s" % subprocess.check_output('echo $CUDA_VISIBLE_DEVICES', shell=True).decode('utf'))
 
@@ -121,8 +120,8 @@ def train(args):
     ###################################################################################################
     #   Load data                                                                                     #
     ###################################################################################################
-    cp_emb = [np.load(path) for path in args.ent_emb_paths]
-    cp_emb = torch.tensor(np.concatenate(cp_emb, 1), dtype=torch.float)
+    cp_emb = np.concatenate([np.load(path) for path in args.ent_emb_paths], 1)
+    cp_emb = torch.tensor(cp_emb, dtype=torch.float)
 
     concept_num, concept_dim = cp_emb.size(0), cp_emb.size(1)
     print('| num_concepts: {} |'.format(concept_num))
@@ -344,8 +343,8 @@ def eval_detail(args):
     assert args.load_model_path is not None
     model_path = args.load_model_path
 
-    cp_emb = [np.load(path) for path in args.ent_emb_paths]
-    cp_emb = torch.tensor(np.concatenate(cp_emb, 1), dtype=torch.float)
+    cp_emb = np.concatenate([np.load(path) for path in args.ent_emb_paths], 1)
+    cp_emb = torch.tensor(cp_emb, dtype=torch.float)
     concept_num, concept_dim = cp_emb.size(0), cp_emb.size(1)
     print('| num_concepts: {} |'.format(concept_num))
 
